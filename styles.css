@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+h1{
+    text-align:center;
+    font-weight: 325;
+    font-size: 75px;
+    margin-bottom: 70px;
+    
+}
+
+.neon {
+    color: #fff;
+    text-shadow:
+      0 0 5px pink,
+      0 0 10px pink,
+      0 0 20px pink,
+      0 0 40px pink,
+      0 0 80px pink,
+      0 0 90px pink,
+      0 0 100px pink,
+      0 0 150px pink;
+  }
+  :root {
+    font-size: calc(1vw + 1vh + 1.5vmin);
+  }
+  html, body {  
+    margin: 0;
+  }
+  .h1-container {
+    margin: 0 auto;
+  }
+  body {
+    display: flex;
+    justify-content:center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #010a00;
+    background-image: url("https://www.transparenttextures.com/patterns/3px-tile.png");
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-family: -apple-system, 
+      BlinkMacSystemFont, 
+      "Segoe UI", 
+      Roboto, 
+      Oxygen-Sans, 
+      Ubuntu, 
+      Cantarell, 
+      "Helvetica Neue", 
+      sans-serif;
+    font-size: 1rem;
+  }
+  .gameboard{
+    position: relative;
+    background-color: pink;
+    width: 40%;
+    margin-top: 80px;
+    margin-left: 40px;
+    padding-top: 40%;
+    border-radius: 6px;
+}
+.squares{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 1rem;
+    /* border: 1px dotted green; */
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3px;
+    border-radius: 6px;
+}
+.square{
+    position: relative;
+    background-color: black;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+p{
+    font-size: 14px;
+    font-family:'Press Start 2P', cursive;
+    padding-left:5px;
+    padding-bottom:5px;
+
+}
+
+
+.X::after{
+    content:'✕';
+    font-size: 60px;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    color: #fff;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080;
+}
+
+.O::after{
+    content:'o';
+    font-size: 83px;
+    display: flex;
+    justify-content: center;
+    margin-top: 11px;
+    color:#fff;
+    text-shadow:
+    0 0 5px #0ff,
+    0 0 10px #0ff,
+    0 0 20px #0ff,
+    0 0 40px #0ff,
+    0 0 80px #0ff,
+    0 0 90px #0ff,
+    0 0 100px #0ff,
+    0 0 150px #0ff;
+}
+
+#reset{
+    margin-left:10px;
+    padding: 7px;
+    font-family:'Press Start 2P', cursive;
+    background-color:black;
+    border:1px solid yellow;
+    color:yellow;
+    cursor:pointer;
+}
+
