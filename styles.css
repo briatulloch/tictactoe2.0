@@ -66,7 +66,7 @@ h1{
     padding-top: 40%;
     border-radius: 6px;
 }
-.squares{
+.cells{
     position: absolute;
     top: 0;
     right: 0;
@@ -80,7 +80,7 @@ h1{
     grid-gap: 3px;
     border-radius: 6px;
 }
-.square{
+.cell{
     position: relative;
     background-color: black;
     border-radius: 4px;
@@ -90,13 +90,13 @@ h1{
 p{
     font-size: 14px;
     font-family:'Press Start 2P', cursive;
-    padding-left:5px;
-    padding-bottom:5px;
+    padding-left:7px;
+    padding-top:14px;
+    padding-bottom:7px;
 
 }
 
-
-.X::after{
+.x::after{
     content:'✕';
     font-size: 60px;
     display: flex;
@@ -106,12 +106,13 @@ p{
     text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080;
 }
 
-.O::after{
+.o::after{
     content:'o';
-    font-size: 83px;
+    font-size: 85px;
+    font-weight: 300;
     display: flex;
     justify-content: center;
-    margin-top: 11px;
+    margin-top: 7px;
     color:#fff;
     text-shadow:
     0 0 5px #0ff,

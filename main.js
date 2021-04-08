@@ -3,45 +3,46 @@ const createPlayer = (name, marker) => {
     return {name, marker};
 }
 
+function startGame() {
+
 // gameboard object
 const gameBoard = (() => {
 
-    // generate board array
+    //board array
     let board = [];
     for (i = 0; i < 9; i++) {
         board.push('');
     }
 
     // display square for each cell
-    let squares = document.querySelector('.squares');
+    let cells = document.querySelector('.cells');
 
     board.forEach((item, index) => {
-        const square = document.createElement('div');
-        square.className = 'square';
-        squares.appendChild(square);
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cells.appendChild(cell);
     })
 
-    // add event listeners on each square
-    Array.from(squares.children).forEach((square, index) => {
-        square.addEventListener('click', () => {
+    // add event listeners to squares
+    Array.from(cells.children).forEach((cell, index) => {
+        cell.addEventListener('click', () => {
             // display active player marker
-            square.classList.add(game.currentPlayer.marker);
-            square.setAttribute('data', game.currentPlayer.marker);
+            cell.classList.add(game.currentPlayer.marker);
+            cell.setAttribute('data', game.currentPlayer.marker);
             // update array value to be that of active player
             board[index] = game.currentPlayer.marker;
             // remove event listener from the marked index
-            square.style.pointerEvents = 'none';
-            // update remainingSpots
+            cell.style.pointerEvents = 'none';
+            // update remaining spots
             game.remainingSpots -= 1;
-            // check winner: if all 3 values within any of these conditions are ===...
+            // check winner: if all 3 values are equal for any condition
             game.handleWin();
             // check remaining spots
             if (game.winner == false) {
                 if (game.remainingSpots > 0) {
                     game.switchPlayer();
-                    game.nextPlayer();
                 } else if (game.remainingSpots == 0) {
-                    game.declareTie();
+                    game.handleTie();
                 }
             }
         })
@@ -56,22 +57,21 @@ const gameBoard = (() => {
 
 // game object
 const game = (() => {
-   
-    // declare players
-    const playerOne = createPlayer('Player 1', 'X');
-    const playerTwo = createPlayer('Player 2', 'O');
+    // players
+    const playerOne = createPlayer('Player 1', 'x');
+    const playerTwo = createPlayer('Player 2', 'o');
 
-    // starting point
+    // start
     let currentPlayer = playerOne;
     let winner = false;
     let remainingSpots = 9;
 
     // selectors
-    let subtext = document.querySelector('.subtext'); // display winner/tie
+    let gameStatus = document.querySelector('.game-status'); // display winner/tie
     let playerName = document.querySelector('.player-name'); // alert player turn
 
-    // winning conditions
-    const winningCombinations = [
+    // winning cell combinations
+    const winningCombos = [
         [0,1,2],
         [3,4,5],
         [6,7,8],
@@ -84,28 +84,26 @@ const game = (() => {
 
     // check winner
     function handleWin() {
-        winningCombinations.forEach((item, index) => { // [0, 1, 2, 3, 4, 5, 6, 7]
+        winningCombos.forEach((item, index) => { 
             if (gameBoard.board[item[0]] === this.currentPlayer.marker && gameBoard.board[item[1]] === this.currentPlayer.marker && gameBoard.board[item[2]] === this.currentPlayer.marker) {
-                subtext.innerHTML = `<b>Yay! ${this.currentPlayer.name} wins!</b>`;
+                gameStatus.innerHTML = `<b>Yay! ${this.currentPlayer.name} wins!</b>`;
                 this.winner = true;
             } 
         })
-    }
+        };
+    
 
-    // alert next player
+    // switch player
     function switchPlayer() {
+        //switches text alert in subtext
         this.currentPlayer === playerOne ? playerName.textContent = 'Player 2' : playerName.textContent = 'Player 1';
-    }
-
-    // next player
-    function nextPlayer() {
+        //switches actual game logic (x then o etc.)
         this.currentPlayer === playerOne ? this.currentPlayer = playerTwo : this.currentPlayer = playerOne;
-        
     }
 
-    // declare tie
-    function declareTie() {
-        subtext.innerHTML = "<b>It's a tie!😯</b>";
+    // determine tie
+    function handleTie() {
+        gameStatus.innerHTML = "<b>It's a tie!😯</b>";
     }
 
     // return
@@ -114,20 +112,28 @@ const game = (() => {
         remainingSpots,
         handleWin,
         switchPlayer,
-        nextPlayer,
-        declareTie,
+        handleTie,
         winner
     };
 })();
+}
+
+startGame();
+
+function cleanUp() {
+    document.querySelector('.game-status').innerHTML = `<span class="player-name">Player 1</span>, you're up!`;
+    document.querySelector('.cells').innerHTML = '';
+};
 
 function handleReset(){
-    document.querySelector('#reset').addEventListener('click', function(){   
-     location.reload();
+    document.querySelector('#reset').addEventListener('click', function(){
+     cleanUp();
+     startGame();
     });
+   
 }
 
 handleReset();
-
 
 
 
